@@ -70,16 +70,11 @@ pub fn clear_token() {
     }
 }
 
-// API基础地址
-fn api_base() -> &'static str {
-    "/api"
-}
-
 // API函数
 pub async fn api_login(req: &LoginRequest) -> Result<AuthResponse, String> {
     let client = reqwest::Client::new();
     let resp = client
-        .post(&format!("{}/login", api_base()))
+        .post("http://localhost:3000/api/login")
         .json(&req)
         .send()
         .await
@@ -96,7 +91,7 @@ pub async fn api_login(req: &LoginRequest) -> Result<AuthResponse, String> {
 pub async fn api_register(req: &RegisterRequest) -> Result<AuthResponse, String> {
     let client = reqwest::Client::new();
     let resp = client
-        .post(&format!("{}/register", api_base()))
+        .post("http://localhost:3000/api/register")
         .json(&req)
         .send()
         .await
@@ -115,7 +110,7 @@ pub async fn api_get_users() -> Result<Vec<User>, String> {
     let token = get_token().ok_or("未登录".to_string())?;
     
     let resp = client
-        .get(&format!("{}/users", api_base()))
+        .get("http://localhost:3000/api/users")
         .header("Authorization", format!("Bearer {}", token))
         .send()
         .await
@@ -134,7 +129,7 @@ pub async fn api_delete_user(user_id: i64) -> Result<(), String> {
     let token = get_token().ok_or("未登录".to_string())?;
     
     let resp = client
-        .delete(&format!("{}/users/{}", api_base(), user_id))
+        .delete(format!("http://localhost:3000/api/users/{}", user_id))
         .header("Authorization", format!("Bearer {}", token))
         .send()
         .await

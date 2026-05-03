@@ -1,0 +1,21 @@
+# Rust
+target/
+Cargo.lock
+
+# Logs
+*.log
+
+# Database
+app.db
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Frontend build
+frontend/dist/

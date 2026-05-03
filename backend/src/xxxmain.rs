@@ -8,8 +8,6 @@ use axum::{
     Router,
 };
 use tower_http::cors::{Any, CorsLayer};
-use tower_http::services::ServeDir;
-use std::env;
 
 #[tokio::main]
 async fn main() {
@@ -28,15 +26,12 @@ async fn main() {
                 .allow_methods(Any)
                 .allow_headers(Any),
         )
-        .with_state(pool)
-        .fallback_service(ServeDir::new("frontend/dist"));
+        .with_state(pool);
 
-    let port = env::var("PORT").unwrap_or_else(|_| "3000".to_string());
-    let addr = format!("0.0.0.0:{}", port);
-    let listener = tokio::net::TcpListener::bind(&addr)
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
         .await
         .unwrap();
 
-    println!("Server running on http://{}", addr);
+    println!("Server running on http://localhost:3000");
     axum::serve(listener, app).await.unwrap();
 }
