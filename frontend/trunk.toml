@@ -1,0 +1,8 @@
+[package]
+name = "leptos-axum-frontend"
+version = "0.1.0"
+edition = "2021"
+authors = ["you"]
+
+[build]
+target = "index.html"

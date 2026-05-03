@@ -1,0 +1,17 @@
+[package]
+name = "leptos-axum-frontend"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+leptos = { version = "0.6", features = ["csr"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", features = ["json"] }
+web-sys = { version = "0.3", features = ["Window", "Storage"] }
+console_error_panic_hook = "0.1"
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+wasm-bindgen-futures = "0.4"
